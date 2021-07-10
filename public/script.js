@@ -2,7 +2,7 @@
 const socket = io('/'); 
 
 const user__name = prompt("What is your name");
-socket.emit('user-connected', user__name);
+socket.emit('new-user', user__name);
 
 const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
@@ -43,7 +43,7 @@ navigator.mediaDevices.getUserMedia({
         text.val('');
         }
     });
-    socket.on('createMessage',(message) => {
+    socket.on('createMessage',(message, user__name) => {
         $('ul').append(`<li class="message"><b>${user__name}</b><br/>${message}</li>`);
 
     })

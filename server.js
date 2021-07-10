@@ -27,12 +27,11 @@ io.on('connection', socket => {
         socket.join(roomId);
         socket.to(roomId).emit('user-connected',userId);
 
-        socket.on('user-connected', user__name => {
+        socket.on('new-user', user__name => {
             users[socket.id] = user__name
-        })
-
-        socket.on('message', (message) => {
-            io.to(roomId).emit('createMessage', {message: message, user__name : users[socket.id]})
+            socket.on('message', (message) => {
+                io.to(roomId).emit('createMessage', {message: message, user__name : users[socket.id]})
+            })
         })
     })
 })
