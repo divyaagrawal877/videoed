@@ -1,5 +1,9 @@
 
 const socket = io('/'); 
+
+const user__name = prompt("What is your name");
+socket.emit('user-connected', user__name);
+
 const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
 myVideo.muted = true;
@@ -40,7 +44,7 @@ navigator.mediaDevices.getUserMedia({
         }
     });
     socket.on('createMessage',(message) => {
-        $('ul').append(`<li class="message"><b>user__name</b><br/>${message}</li>`);
+        $('ul').append(`<li class="message"><b>${user__name}</b><br/>${message}</li>`);
 
     })
 })
