@@ -39,7 +39,7 @@ navigator.mediaDevices.getUserMedia({
         text.val('');
         }
     });
-    socket.on('createMessage',(user__name,message) => {
+    socket.on('createMessage',(message) => {
         $('ul').append(`<li class="message"><b>${user__name}</b><br/>${message}</li>`);
 
     })

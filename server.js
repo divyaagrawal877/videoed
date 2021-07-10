@@ -25,8 +25,8 @@ io.on('connection', socket => {
         socket.join(roomId);
         socket.to(roomId).emit('user-connected',userId);
 
-        socket.on('message', (user__name, message) => {
-            io.to(roomId).emit('createMessage', user__name, message)
+        socket.on('message', (message) => {
+            io.to(roomId).emit('createMessage', message)
         })
     })
 })
