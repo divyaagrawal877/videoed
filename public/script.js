@@ -1,8 +1,6 @@
 
 const socket = io('/'); 
 
-const user__name = prompt("What is your name");
-socket.emit('new-user', user__name);
 
 const videoGrid = document.getElementById('video-grid');
 const myVideo = document.createElement('video');
@@ -36,6 +34,7 @@ navigator.mediaDevices.getUserMedia({
         connecToNewUser(userId, stream);        
     })
 
+
     let text = $('input');
     $('html').keydown((e) => {
     if(e.which == 13 && text.val().length !== 0) {
@@ -43,8 +42,8 @@ navigator.mediaDevices.getUserMedia({
         text.val('');
         }
     });
-    socket.on('createMessage',(message, user__name) => {
-        $('ul').append(`<li class="message"><b>${user__name}</b><br/>${message}</li>`);
+    socket.on('createMessage',(data) => {
+        $('ul').append(`<li class="message"><b>user</b><br/>message</li>`);
 
     })
 })

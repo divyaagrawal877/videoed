@@ -20,20 +20,18 @@ app.get('/:room', (req,res) => {
     res.render('room', {roomId : req.params.room})
 })
 
-const users ={};
+const users = {} ;
 
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
         socket.join(roomId);
         socket.to(roomId).emit('user-connected',userId);
 
-        socket.on('new-user', user__name => {
-            users[socket.id] = user__name
-            socket.on('message', (message) => {
-                io.to(roomId).emit('createMessage', {message: message, user__name : users[socket.id]})
-            })
+        socket.on('message', (message) => {
+            io.to(roomId).emit('createMessage', {message : message, names : users[socket.id]});
         })
     })
 })
 
 server.listen(process.env.PORT||3030);
+// server.listen(3030);
