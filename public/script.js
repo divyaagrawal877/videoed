@@ -11,7 +11,6 @@ var peer = new Peer(undefined, {
     host: '/',
     port: '443'
 }); 
-const peers = {}
 
 let myVideoStream
 navigator.mediaDevices.getUserMedia({
@@ -49,9 +48,6 @@ navigator.mediaDevices.getUserMedia({
     })
 })
 
-socket.on('user-disconnected', userId => {
-  if (peers[userId]) peers[userId].close()
-})
 
 peer.on('open', id =>{
     console.log("abcd");
@@ -65,11 +61,7 @@ const connecToNewUser = (userId, stream) => {
     call.on('stream', userVideoStream => {
         addVideoStream(video, userVideoStream);
     })
-    call.on('close', () => {
-      video.remove()
-    })
-  
-    peers[userId] = call
+   
 }
 
 const addVideoStream = (video, stream) => {
