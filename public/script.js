@@ -48,6 +48,10 @@ navigator.mediaDevices.getUserMedia({
     })
 })
 
+socket.on('user-disconnected', userId => {
+  if (peers[userId]) peers[userId].close()
+})
+
 peer.on('open', id =>{
     console.log("abcd");
     socket.emit('join-room', ROOM_ID, id);
