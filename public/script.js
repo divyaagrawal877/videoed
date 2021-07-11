@@ -21,7 +21,6 @@ navigator.mediaDevices.getUserMedia({
     addVideoStream(myVideo, stream);
 
     peer.on('call', call => {
-        console.log("afddgfk");
         call.answer(stream)
         const video = document.createElement('video')
         call.on('stream', userVideoStream => {
@@ -30,7 +29,6 @@ navigator.mediaDevices.getUserMedia({
     })
 
     socket.on('user-connected', (userId) => {
-        console.log("jaskjv");
         connecToNewUser(userId, stream);        
     })
 
@@ -50,12 +48,10 @@ navigator.mediaDevices.getUserMedia({
 
 
 peer.on('open', id =>{
-    console.log("abcd");
     socket.emit('join-room', ROOM_ID, id);
 })
 
 const connecToNewUser = (userId, stream) => {
-    console.log("ytrewq");
     const call = peer.call(userId, stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
@@ -66,7 +62,6 @@ const connecToNewUser = (userId, stream) => {
 
 const addVideoStream = (video, stream) => {
     video.srcObject = stream;
-    console.log("qwerty");
     video.addEventListener('loadedmetadata', () => {
         video.play();
     })
