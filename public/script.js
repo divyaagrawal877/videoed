@@ -11,6 +11,7 @@ var peer = new Peer(undefined, {
     host: '/',
     port: '443'
 }); 
+const peers = {}
 
 let myVideoStream
 navigator.mediaDevices.getUserMedia({
@@ -64,6 +65,11 @@ const connecToNewUser = (userId, stream) => {
     call.on('stream', userVideoStream => {
         addVideoStream(video, userVideoStream);
     })
+    call.on('close', () => {
+      video.remove()
+    })
+  
+    peers[userId] = call
 }
 
 const addVideoStream = (video, stream) => {
